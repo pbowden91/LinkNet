@@ -7,5 +7,22 @@
     <string name="title_section1">Section 1</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-
+    <string name="button0">Turn On File Sharing</string>
+    <string name="button1">Turn Off File Sharing</string>
+    <color name="myColor">#F2F2F2</color>
+    <string name="filefolder">Select Base Folder</string>
+    <string name="empty_directory">Empty Directory</string>
+    <string name="storage_removed">Storage was removed or unmounted.</string>
+    <string name="choose_file">Select a file</string>
+    <string name="error_selecting_file">Error selecting File</string>
+    <string name="chooser_title">Select Root Folder</string>
+        <string name="text2">User to give access to</string>
+            <string name="button3">Folder/File(s) to Give Access</string>
+        
+        <string-array name="country_arrays">
+        <item>Chris Shannon</item>
+        <item>Alex Mazure</item>
+        <item>Paul Bowden</item>
+        <item>Joe Smith</item>
+    </string-array>
 </resources>
