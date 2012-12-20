@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class login2 extends Activity {
+public class register extends Activity {
 
-    EditText un,pw;
+    EditText un,pw, confirm;
 	TextView error;
     Button ok;
     String url;
@@ -29,32 +29,33 @@ public class login2 extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.register);
         un=(EditText)findViewById(R.id.et_un);
         pw=(EditText)findViewById(R.id.et_pw);
-        ok=(Button)findViewById(R.id.btn_login);
+        confirm=(EditText)findViewById(R.id.confirm);
+        ok=(Button)findViewById(R.id.btn_register);
         error=(TextView)findViewById(R.id.tv_error);
 
         ok.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-            	new RetrieveLogin().execute();
+            	new Register().execute();
             }
         });
-        
-        Button register = (Button) findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() {
+
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), register.class);
+                Intent myIntent = new Intent(view.getContext(), login2.class);
                 startActivityForResult(myIntent, 0);
             }
 
         });
-        
+    
     }
    
-    class RetrieveLogin extends AsyncTask<String, Void, String>{
+    class Register extends AsyncTask<String, Void, String>{
         private Exception exception;
     	protected String doInBackground(String... urls) {
             try {
@@ -62,9 +63,10 @@ public class login2 extends Activity {
 				ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 				postParameters.add(new BasicNameValuePair("username", un.getText().toString()));
 				postParameters.add(new BasicNameValuePair("password", pw.getText().toString()));
+				postParameters.add(new BasicNameValuePair("confirm", confirm.getText().toString()));
 				//String valid = "1";
 				//String response = null;
-			    String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linklogin.php", postParameters);
+			    String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linkregister.php", postParameters);
 				    return response;
             } catch (Exception e) {
                 this.exception = e;

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="210dip"
+    android:layout_marginTop="10dip"
+    android:background="@drawable/bg1" >
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/btn_login"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="9dip"
+        android:layout_marginTop="15dip"
+        android:text=""
+        android:textColor="#AA0000"
+        android:textSize="7pt" />
+
+    <EditText
+        android:id="@+id/et_un"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/et_pw"
+        android:layout_alignLeft="@+id/et_pw"
+        android:layout_marginBottom="11dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/et_pw"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_pw"
+        android:layout_alignBottom="@+id/tv_pw"
+        android:layout_toRightOf="@+id/TextView01"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:password="true" />
+
+    <TextView
+        android:id="@+id/tv_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tv_un"
+        android:layout_centerVertical="true"
+        android:text="Password:"
+        android:textColor="#FFFFFF"
+        android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/tv_un"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_error"
+        android:layout_alignTop="@+id/et_un"
+        android:layout_marginLeft="17dp"
+        android:text="User Name:"
+        android:textColor="#FFFFFF"
+        android:textSize="10pt" />
+
+    <EditText
+        android:id="@+id/confirm"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TextView01"
+        android:layout_alignLeft="@+id/et_pw"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:password="true" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_error"
+        android:layout_below="@+id/et_pw"
+        android:layout_marginTop="13dp"
+        android:text="Confirm Password:"
+        android:textColor="#FFFFFF"
+        android:textSize="10pt" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/EditText01"
+        android:layout_below="@+id/EditText01"
+        android:layout_marginLeft="12dp"
+        android:text="Register" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_pw"
+        android:layout_below="@+id/TextView01"
+        android:text="Back to Login" />
+
+</RelativeLayout>

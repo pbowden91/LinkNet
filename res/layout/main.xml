@@ -44,15 +44,6 @@
         android:layout_below="@id/et_un"
         android:layout_marginLeft="17dip"
         android:password="true"        />
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="100dip"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_pw"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="15dip"
-        android:layout_marginLeft="110dip"
-        android:text="Login" />
        
      <TextView
         android:id="@+id/tv_error"
@@ -60,10 +51,30 @@
         android:layout_height="40dip"
         android:textSize="7pt"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/btn_login"
         android:layout_marginRight="9dip"
         android:layout_marginTop="15dip"
         android:layout_marginLeft="15dip"
         android:textColor="#AA0000"
         android:text=""/>
+
+
+     <Button
+         android:id="@+id/btn_login"
+         android:layout_width="100dip"
+         android:layout_height="wrap_content"
+         android:layout_alignRight="@+id/tv_error"
+         android:layout_below="@+id/et_pw"
+         android:layout_marginRight="43dp"
+         android:layout_marginTop="17dp"
+         android:text="Login" />
+
+     <Button
+         android:id="@+id/register"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/btn_login"
+         android:layout_alignBottom="@+id/btn_login"
+         android:layout_toLeftOf="@+id/et_un"
+         android:text="To Register" />
+
 </RelativeLayout>
