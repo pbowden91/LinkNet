@@ -24,9 +24,26 @@
             </intent-filter>
         </activity>
                 <activity android:name="Activity2"></activity>
+       
+                <activity android:name="FileChooserActivity"></activity>
                 <activity android:name="register"></activity>
                 <activity android:name="login2"></activity>
                 
+               <activity
+            android:name="com.example.filenet.utils.FileChooserActivity"
+            android:exported="false"
+            android:icon="@drawable/ic_chooser"
+            android:label="@string/choose_file"
+            android:theme="@style/ChooserTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
