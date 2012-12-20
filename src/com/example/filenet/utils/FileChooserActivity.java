@@ -19,9 +19,11 @@ package com.example.filenet.utils;
 import java.io.File;
 
 import com.paul.linknet.R;
+import com.paul.linknet.SessionManagement;
 import com.paul.linknet.R.id;
 import com.paul.linknet.R.layout;
 import com.paul.linknet.R.string;
+//import com.paul.linknet.login2.RetrieveLogin;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -35,6 +37,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.BackStackEntry;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -48,6 +52,7 @@ import android.widget.Toast;
 public class FileChooserActivity extends FragmentActivity implements
 		OnBackStackChangedListener {
 
+	Button ok;
 	public static final String PATH = "path";
 	public static final String EXTERNAL_BASE_PATH = Environment
 			.getExternalStorageDirectory().getAbsolutePath();
@@ -80,6 +85,19 @@ public class FileChooserActivity extends FragmentActivity implements
 		}
 
 		setTitle(mPath);
+        ok=(Button)findViewById(R.id.button1);
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            SessionManagement session = new SessionManagement(getApplicationContext()); 
+
+              @Override
+              public void onClick(View v) {
+            	  Uri myUri = Uri.parse(mPath);
+      			setResult(RESULT_OK, new Intent().setData(myUri));
+    			finish();
+              }
+          });
+          
 	}
 
 	@Override

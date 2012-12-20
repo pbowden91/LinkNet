@@ -16,13 +16,22 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <FrameLayout
         android:id="@+id/explorer_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="333dp"
+        android:layout_height="406dp"
+        android:layout_marginLeft="@dimen/list_padding"
         android:layout_marginRight="@dimen/list_padding"
-        android:layout_marginLeft="@dimen/list_padding" />
+        android:layout_weight="0.75" >
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select File/Folder" />
 
 </LinearLayout>
