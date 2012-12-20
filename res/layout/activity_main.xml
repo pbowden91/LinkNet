@@ -1,6 +1,90 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity" />
+<?xml version="1.0" encoding="utf-8"?>
+
+    <TabHost android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tabHost"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <TabWidget
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@android:id/tabs"
+    />
+     <FrameLayout
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@android:id/tabcontent"
+     >
+     
+     <LinearLayout
+     android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tab1"
+    android:orientation="vertical"
+    android:paddingTop="60dp"
+     >
+     
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="buttonClick"
+        android:text="Select Folder" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="69dp"
+        android:entries="@array/country_arrays" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+     </LinearLayout>
+     
+     <LinearLayout
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tab2"
+    android:orientation="vertical"
+    android:paddingTop="60px"
+     >
+     <TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="100px" 
+    android:text="This is tab 2"
+    android:id="@+id/txt2"
+    />
+   
+     </LinearLayout>
+     
+      <LinearLayout
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tab3"
+    android:orientation="vertical"
+    android:paddingTop="60px"
+     >
+     <TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="100px" 
+    android:text="This is tab 3"
+    android:id="@+id/txt3"
+    />
+   
+     </LinearLayout>
+     </FrameLayout>
+    
+    </TabHost>
