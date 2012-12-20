@@ -2,6 +2,7 @@ package com.paul.linknet;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
@@ -34,11 +36,18 @@ public class MainActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-
+//    SessionManagement session = new SessionManagement(getApplicationContext());
+	//Context context = getApplicationContext();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	    SessionManagement session = new SessionManagement(getApplicationContext());
+
+		
+        session.checkLogin();
+        
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -144,6 +153,20 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.logout:
+	            SessionManagement session = new SessionManagement(getApplicationContext()); 
+
+	           session.logoutUser();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.

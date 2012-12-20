@@ -24,7 +24,7 @@ public class register extends Activity {
     Button ok;
     String url;
     
-    
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,10 @@ public class register extends Activity {
         confirm=(EditText)findViewById(R.id.confirm);
         ok=(Button)findViewById(R.id.btn_register);
         error=(TextView)findViewById(R.id.tv_error);
+        SessionManagement session = new SessionManagement(getApplicationContext()); 
 
-        ok.setOnClickListener(new View.OnClickListener() {
-
+        ok.setOnClickListener(new View.OnClickListener() {        	
+        	
             @Override
             public void onClick(View v) {
             	new Register().execute();
@@ -67,7 +68,7 @@ public class register extends Activity {
 				//String valid = "1";
 				//String response = null;
 			    String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linkregister.php", postParameters);
-				    return response;
+				    return response.trim();
             } catch (Exception e) {
                 this.exception = e;
 			    //un.setText("heytest");
@@ -75,7 +76,18 @@ public class register extends Activity {
             }
         }
         protected void onPostExecute(String result) {
-		    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+        	
+            try { 
+                int id = Integer.parseInt(result);
+                SessionManagement session = new SessionManagement(getApplicationContext()); 
+
+                session.createLoginSession(id);
+
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+            } catch(NumberFormatException e) { 
+    		    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+            }
        }    
     }
 }

@@ -9,6 +9,8 @@ import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,9 @@ public class login2 extends Activity {
     Button ok;
     String url;
     
+
+    //SessionManagement session = new SessionManagement(getApplicationContext()); 
+
     
     /** Called when the activity is first created. */
     @Override
@@ -36,6 +41,7 @@ public class login2 extends Activity {
         error=(TextView)findViewById(R.id.tv_error);
 
         ok.setOnClickListener(new View.OnClickListener() {
+          SessionManagement session = new SessionManagement(getApplicationContext()); 
 
             @Override
             public void onClick(View v) {
@@ -62,18 +68,24 @@ public class login2 extends Activity {
 				ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 				postParameters.add(new BasicNameValuePair("username", un.getText().toString()));
 				postParameters.add(new BasicNameValuePair("password", pw.getText().toString()));
-				//String valid = "1";
-				//String response = null;
 			    String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linklogin.php", postParameters);
-				    return response;
+				    return response.trim();
             } catch (Exception e) {
                 this.exception = e;
-			    //un.setText("heytest");
                 return e.toString();
             }
         }
         protected void onPostExecute(String result) {
-		    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-       }    
+            try { 
+                int id = Integer.parseInt(result);
+                SessionManagement session = new SessionManagement(getApplicationContext()); 
+
+                session.createLoginSession(id);
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+            } catch(NumberFormatException e) { 
+    		    Toast.makeText(getApplicationContext(), result.trim(), Toast.LENGTH_SHORT).show();
+            }       
+        }    
     }
 }
