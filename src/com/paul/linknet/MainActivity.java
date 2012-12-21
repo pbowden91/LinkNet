@@ -61,14 +61,14 @@ public class MainActivity extends FragmentActivity implements
 
 		TabSpec spec1=tabHost.newTabSpec("Tab 1");
 		spec1.setContent(R.id.tab1);
-		spec1.setIndicator("Tab 1");
+		spec1.setIndicator("Host Settings");
 
 		TabSpec spec2=tabHost.newTabSpec("Tab 2");
-		spec2.setIndicator("Tab 2");
+		spec2.setIndicator("Download Files");
 		spec2.setContent(R.id.tab2);
 
 		TabSpec spec3=tabHost.newTabSpec("Tab 3");
-		spec3.setIndicator("Tab 3");
+		spec3.setIndicator("Set Permissions");
 		spec3.setContent(R.id.tab3);
 
 		tabHost.addTab(spec1);
@@ -97,24 +97,40 @@ public void buttonClick(View view) {
   switch (view.getId()) {
   case R.id.button1:
     Button button1 = (Button) findViewById(R.id.button1);
-    if (button1.getText() == "Turn On File Sharing") {
-  	button1.setText("Turn Off File Sharing");
-      Toast.makeText(this, "Turning on file sharing...",
-          Toast.LENGTH_LONG).show();
+    //Toast.makeText(this, button1.getText(), Toast.LENGTH_LONG).show();
+      if (button1.getText().toString() == "Turn Off File Sharing") {
+          button1.setText("Turn On File Sharing");
+          Toast.makeText(this, "Turning off file sharing...",
+    	            Toast.LENGTH_LONG).show();
+          sharingOff();
     }
     
     else{
-      button1.setText("Turn On File Sharing");
-      Toast.makeText(this, "Turning off file sharing...",
-	            Toast.LENGTH_LONG).show();
+ 		button1.setText("Turn Off File Sharing");
+        Toast.makeText(this, "Turning on file sharing...",
+        Toast.LENGTH_LONG).show();
+        sharingOn();
     }
     break;
     case R.id.button2:
+          showChooser();
+          break;
+    case R.id.button3:
           showChooser();
     break;
   }
 
 }
+
+public void sharingOn()
+{
+	
+}
+public void sharingOff()
+{
+	
+}
+
 
 private void showChooser() {
 		// Use the GET_CONTENT intent from the utility class

@@ -16,59 +16,76 @@
     android:id="@android:id/tabcontent"
      >
      
-     <LinearLayout
-     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:id="@+id/tab1"
     android:orientation="vertical"
-    android:paddingTop="60dp"
-     >
+    >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="43dp"
+                        android:onClick="buttonClick"
+            
+            android:text="Turn On File Sharing" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="64dp"
+            android:onClick="buttonClick"
+            android:text="Select Folder" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="77dp"
+            android:ems="10" />
+
+     </RelativeLayout>
      
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:onClick="buttonClick"
-        android:text="Select Folder" />
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="69dp"
-        android:entries="@array/country_arrays" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-     </LinearLayout>
-     
-     <LinearLayout
-     android:layout_width="fill_parent"
+    <LinearLayout
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/tab2"
     android:orientation="vertical"
     android:paddingTop="60px"
      >
-     <TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="100px" 
-    android:text="This is tab 2"
-    android:id="@+id/txt2"
-    />
-   
-     </LinearLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="64dp"
+            android:onClick="buttonClick"
+            android:text="Select Folder" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="60dp"
+            android:ems="10" 
+              android:hint="Enter Username" />
+   </LinearLayout>
      
       <LinearLayout
      android:layout_width="fill_parent"
@@ -77,13 +94,38 @@
     android:orientation="vertical"
     android:paddingTop="60px"
      >
-     <TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="100px" 
-    android:text="This is tab 3"
-    android:id="@+id/txt3"
-    />
-   
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="104dp"
+            android:onClick="buttonClick"
+            android:text="Select Folder" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="60dp"
+            android:ems="10" 
+              android:hint="Username for Permission" />
+        
+                <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="64dp"
+            android:onClick="buttonClick"
+            android:text="Add Permissions" />
      </LinearLayout>
      </FrameLayout>
     
