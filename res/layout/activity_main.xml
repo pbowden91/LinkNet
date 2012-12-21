@@ -57,11 +57,22 @@
      </RelativeLayout>
      
     <LinearLayout
-        android:id="@+id/tab2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingTop="60px" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tab2"
+    android:orientation="vertical"
+    android:paddingTop="60px"
+     >
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText1"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="64dp"
+            android:onClick="buttonClick"
+            android:text="Select Folder" />
 
         <EditText
             android:id="@+id/editText2"
@@ -73,16 +84,6 @@
             android:layout_marginLeft="60dp"
             android:ems="10" 
               android:hint="Enter Username" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="105dp"
-            android:layout_marginTop="64dp"
-            android:onClick="buttonClick"
-            android:text="Select Files" />
-
    </LinearLayout>
      
       <RelativeLayout

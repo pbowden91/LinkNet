@@ -30,7 +30,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +50,7 @@ public class MainActivity extends FragmentActivity implements
 	private static final int REQUEST_CODE = 6384; 
 	private int mRowCount = 0;
 	sqllite db = new sqllite(this);
-	int uid;
-	
+
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -65,39 +63,15 @@ public class MainActivity extends FragmentActivity implements
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
+	//ViewPager mViewPager;
 //    SessionManagement session = new SessionManagement(getApplicationContext());
 	//Context context = getApplicationContext();
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.activity_main, menu);
-	    return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	        case R.id.logout:
-	        	SessionManagement manager = new SessionManagement(MainActivity.this);
-	            manager.logoutUser();
-	            break;
-	    }
-        return true;
-
-	}
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		SessionManagement manager = new SessionManagement(MainActivity.this);
-		
-		manager.checkLogin();
-		uid = manager.getUserDetails(); 
-		
 		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
 		tabHost.setup();
 
@@ -137,7 +111,7 @@ public class MainActivity extends FragmentActivity implements
                     public void onClick(DialogInterface dialog, int which) {
 
                         //Stop the activity
-                        permission p = new permission(uid, obj_itemDetails.getName(), obj_itemDetails.getItemDescription(), 0);
+                        permission p = new permission(obj_itemDetails.getName(), obj_itemDetails.getItemDescription(), 0);
                         db.deletePermission(p);
                     }
 
@@ -151,7 +125,7 @@ public class MainActivity extends FragmentActivity implements
 	private ArrayList<ItemDetails> GetSearchResults(){
     	ArrayList<ItemDetails> results = new ArrayList<ItemDetails>();
     
-    	List<permission> permissionList = db.getAllPermissions(uid);
+    	List<permission> permissionList = db.getAllPermissions();
 //    	
     	for (permission p: permissionList)
     	{
@@ -222,7 +196,7 @@ public void buttonClick(View view) {
         EditText name,file;
         name = (EditText) findViewById(R.id.editText3);
         file = (EditText) findViewById(R.id.editText4);
-    	permission p = new permission(uid, name.getText().toString(), file.getText().toString(), 0);
+    	permission p = new permission(name.getText().toString(), file.getText().toString(), 0);
     	name.setText("");
     	file.setText("");
     	db.addPermission(p);

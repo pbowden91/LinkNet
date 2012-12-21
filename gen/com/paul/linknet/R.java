@@ -48,14 +48,14 @@ public final class R {
         public static final int btn_register=0x7f0b0027;
         public static final int button1=0x7f0b0002;
         public static final int button2=0x7f0b0003;
-        public static final int button3=0x7f0b0007;
+        public static final int button3=0x7f0b0006;
         public static final int button4=0x7f0b000a;
         public static final int button5=0x7f0b0009;
         public static final int confirm=0x7f0b0025;
         public static final int delete=0x7f0b001b;
         public static final int description=0x7f0b0019;
         public static final int editText1=0x7f0b0004;
-        public static final int editText2=0x7f0b0006;
+        public static final int editText2=0x7f0b0007;
         public static final int editText3=0x7f0b000c;
         public static final int editText4=0x7f0b000b;
         public static final int et_pw=0x7f0b0020;
@@ -68,8 +68,9 @@ public final class R {
         public static final int listDescription=0x7f0b001c;
         public static final int listTitle=0x7f0b001a;
         public static final int login=0x7f0b0026;
-        public static final int logout=0x7f0b0029;
+        public static final int logout=0x7f0b002a;
         public static final int lv_country=0x7f0b000e;
+        public static final int menu_settings=0x7f0b0029;
         public static final int name=0x7f0b0015;
         public static final int photo=0x7f0b0014;
         public static final int price=0x7f0b0017;
