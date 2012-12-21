@@ -14,18 +14,17 @@ public class sqllite extends SQLiteOpenHelper {
 	 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
  
     // Database Name
     private static final String DATABASE_NAME = "permissionsManager";
  
     // Contacts table name
     private static final String TABLE_PERMISSIONS = "permissions";
- 
+
     // Contacts Table Columns names
     private static final String KEY_ID = "pid";
-    private static final String KEY_FROM = "id_host";
-    private static final String KEY_TO = "id_receiver";
+    private static final String KEY_TO = "username";
     private static final String KEY_FILE = "file";
     private static final String KEY_CREATED = "time_created";
     private static final String KEY_EXPIRATION = "time_to_expire";
@@ -39,9 +38,10 @@ public class sqllite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_PERMISSIONS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY, "+ KEY_FROM + " INTEGER," + KEY_TO + " INTEGER," + KEY_FILE + " TEXT,"
-                + KEY_CREATED + " TEXT," + KEY_EXPIRATION + " DATE " + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TO + " TEXT," + KEY_FILE + " TEXT,"
+                + KEY_CREATED + " TEXT," + KEY_EXPIRATION + " INTEGER " + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
+        Log.d("DB create:", CREATE_CONTACTS_TABLE);
     }
  
     // Upgrading database
@@ -59,26 +59,23 @@ public class sqllite extends SQLiteOpenHelper {
      */
  
     // Adding new contact
-    void addContact(permission p) {
+    void addPermission(permission p) {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_FROM, p.getHost()); // Contact Name
-        values.put(KEY_TO, p.getReceiver()); // Contact Name
-        values.put(KEY_FILE, p.getFile()); // Contact Name
-        values.put(KEY_EXPIRATION, p.getExpiration()); // Contact Name
 
+        String sql = "INSERT INTO " + TABLE_PERMISSIONS + " (" + KEY_TO + ", " + KEY_FILE + ", " + KEY_EXPIRATION + ") VALUES ('" + p.getName() + "', '" + p.getFile() + "', " + 0 + ")";
+        
         // Inserting Row
-        db.insert(TABLE_PERMISSIONS, null, values);
-        db.close(); // Closing database connection
+        Log.d("Add: ", sql);
+        db.execSQL(sql);
     }
  
     // Getting All Contacts
     public List<permission> getAllHostPermissions(int id) {
         List<permission> permissionList = new ArrayList<permission>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS + " WHERE " + KEY_FROM 
-        		+ " = " + id + " AND " + KEY_TO + " = " + id;
+        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS;
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -88,9 +85,9 @@ public class sqllite extends SQLiteOpenHelper {
             do {
                 permission p = new permission();
                 p.setId(Integer.parseInt(cursor.getString(0)));
-                p.setHost(Integer.parseInt(cursor.getString(1)));
-                p.setReceiver(Integer.parseInt(cursor.getString(2)));
-                p.setFile(cursor.getString(3));
+                p.setName((cursor.getString(1)));
+                //p.setReceiver(Integer.parseInt(cursor.getString(2)));
+                p.setFile(cursor.getString(2));
                 p.setExpiration(Integer.parseInt(cursor.getString(3)));
                 // Adding contact to list
                 permissionList.add(p);
@@ -101,10 +98,10 @@ public class sqllite extends SQLiteOpenHelper {
         return permissionList;
     }
     // Getting All Contacts
-    public List<permission> getAllPermissions(int id) {
+    public List<permission> getAllPermissions() {
         List<permission> permissionList = new ArrayList<permission>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS + " WHERE " + KEY_TO + " = " + id;
+        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS;
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -113,20 +110,19 @@ public class sqllite extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 permission p = new permission();
-                p.setId(Integer.parseInt(cursor.getString(0)));
-                p.setHost(Integer.parseInt(cursor.getString(1)));
-                p.setReceiver(Integer.parseInt(cursor.getString(2)));
-                p.setFile(cursor.getString(3));
-                p.setExpiration(Integer.parseInt(cursor.getString(3)));
+                Log.d("Name:", cursor.getString(1));
+                p.setName((cursor.getString(1)));
+                //p.setReceiver(Integer.parseInt(cursor.getString(2)));
+                p.setFile(cursor.getString(2));
+                p.setExpiration(0);
                 // Adding contact to list
                 permissionList.add(p);
-            } while (cursor.moveToNext());
+           } while (cursor.moveToNext());
         }
  
         // return contact list
-        return permissionList;
-    }
- 
+        return permissionList;    }
+    
 //    // Updating single contact
 //    public int updateContact(Contact contact) {
 //        SQLiteDatabase db = this.getWritableDatabase();
@@ -141,10 +137,13 @@ public class sqllite extends SQLiteOpenHelper {
 //    }
  
     // Deleting single contact
-    public void deleteContact(permission p) {
+    public void deletePermission(permission p) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_PERMISSIONS, KEY_ID + " = ?",
-                new String[] { String.valueOf(p.getId()) });
+        String sql = "DELETE FROM " + TABLE_PERMISSIONS + " WHERE " + KEY_TO + " = '" + p.getName() + "' AND " + KEY_FILE + " = '" + p.getFile() + "'";
+        
+        // Inserting Row
+        Log.d("DELETE: ", sql);
+        db.execSQL(sql);
         db.close();
     }
  

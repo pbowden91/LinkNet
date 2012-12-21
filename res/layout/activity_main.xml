@@ -17,11 +17,10 @@
      >
      
      <RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/tab1"
-    android:orientation="vertical"
-    >
+         android:id="@+id/tab1"
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:orientation="vertical" >
 
         <Button
             android:id="@+id/button1"
@@ -87,46 +86,66 @@
               android:hint="Enter Username" />
    </LinearLayout>
      
-      <LinearLayout
-     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/tab3"
-    android:orientation="vertical"
-    android:paddingTop="60px"
-     >
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editText1"
-            android:layout_marginLeft="105dp"
-            android:layout_marginTop="104dp"
-            android:onClick="buttonClick"
-            android:text="Select Folder" />
+      <RelativeLayout
+          android:id="@+id/tab3"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:orientation="vertical"
+          android:paddingTop="60px" >
 
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="60dp"
-            android:ems="10" 
-              android:hint="Username for Permission" />
-        
-                <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editText1"
-            android:layout_marginLeft="105dp"
-            android:layout_marginTop="64dp"
-            android:onClick="buttonClick"
-            android:text="Add Permissions" />
-     </LinearLayout>
+                   <Button
+                       android:id="@+id/button5"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentBottom="true"
+                       android:layout_centerHorizontal="true"
+                       android:onClick="buttonClick"
+                       android:text="Add Permissions" />
+
+                   <Button
+                       android:id="@+id/button4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_above="@+id/button5"
+                       android:layout_alignParentLeft="true"
+                       android:onClick="buttonClick"
+                       android:text="Select Folder" />
+
+                   <EditText
+                       android:id="@+id/editText4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignBaseline="@+id/button4"
+                       android:layout_alignBottom="@+id/button4"
+                       android:layout_alignParentRight="true"
+                       android:ems="10"
+                       android:hint="Folder" />
+
+                   <EditText
+                       android:id="@+id/editText3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_above="@+id/button4"
+                       android:layout_centerHorizontal="true"
+                       android:ems="10"
+                       android:hint="Username for Permission" />
+               <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="290dp"
+    android:orientation="vertical"
+    android:paddingTop="50px"
+    android:id="@+id/list"
+                           android:layout_marginTop="32dp" >
+    
+    <ListView
+        android:id="@+id/lv_country"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:drawSelectorOnTop="false"
+    />
+                   </LinearLayout>
+
+</RelativeLayout>
      </FrameLayout>
     
     </TabHost>

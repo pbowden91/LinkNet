@@ -2,11 +2,13 @@ package com.paul.linknet;
 
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 import android.content.ActivityNotFoundException;
@@ -14,6 +16,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View.OnClickListener;
+import android.app.ListActivity;
+
 
 
 import com.paul.linknet.R;
@@ -29,14 +33,32 @@ import com.example.filenet.utils.FileUtils;
 import com.example.filenet.utils.MimeTypeParser;
 import com.example.filenet.utils.MimeTypes;
 
-public class Activity2 extends Activity {
+public class Activity2 extends ListActivity {
+    ArrayList<String> listItems=new ArrayList<String>();
+
+    //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
+    ArrayAdapter<String> adapter;
+
+    //RECORDING HOW MUCH TIMES BUTTON WAS CLICKED
+    int clickCounter=0;
+    
 	private static final int REQUEST_CODE = 6384; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+        adapter=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                listItems);
+            setListAdapter(adapter);
 	}
 
+    //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
+    public void addItems(View v) {
+        listItems.add("Clicked : "+clickCounter++);
+        adapter.notifyDataSetChanged();
+    }
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

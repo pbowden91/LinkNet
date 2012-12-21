@@ -1,15 +1,23 @@
 package com.paul.linknet;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.filenet.utils.FileUtils;
+import com.paul.linknet.ItemDetails;
+import com.paul.linknet.ItemListBaseAdapter;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,15 +33,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 	private static final int REQUEST_CODE = 6384; 
+	private int mRowCount = 0;
+	sqllite db = new sqllite(this);
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -73,8 +89,63 @@ public class MainActivity extends FragmentActivity implements
 
 		tabHost.addTab(spec1);
 		tabHost.addTab(spec2);
-		tabHost.addTab(spec3);
+		tabHost.addTab(spec3);		
+
+        ArrayList<ItemDetails> image_details = GetSearchResults();
+        
+        final ListView lv1 = (ListView) findViewById(R.id.lv_country);
+        lv1.setAdapter(new ItemListBaseAdapter(this, image_details));
+        
+        lv1.setOnItemClickListener(new OnItemClickListener() {
+        	@Override
+        	public void onItemClick(AdapterView<?> a, View v, int position, long id) { 
+        		Object o = lv1.getItemAtPosition(position);
+            	final ItemDetails obj_itemDetails = (ItemDetails)o;
+                new AlertDialog.Builder(MainActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Delete")
+                .setMessage("Do you really want to delete " + obj_itemDetails.getName() +  "'s permission for file(s) at " + obj_itemDetails.getItemDescription() + "?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Stop the activity
+                        permission p = new permission(obj_itemDetails.getName(), obj_itemDetails.getItemDescription(), 0);
+                        db.deletePermission(p);
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+        	}  
+        });
 		}
+	
+	private ArrayList<ItemDetails> GetSearchResults(){
+    	ArrayList<ItemDetails> results = new ArrayList<ItemDetails>();
+    
+    	List<permission> permissionList = db.getAllPermissions();
+//    	
+    	for (permission p: permissionList)
+    	{
+           
+        	ItemDetails item_details = new ItemDetails();
+        	item_details.setName(p.getName());
+        	item_details.setItemDescription(p.getFile());
+        	Log.d("Expires:", Integer.toString(p.getExpiration()));
+        	if(p.getExpiration() != 0)
+        	   // item_details.setPrice(p.getExpiration() + " hours");
+        		item_details.setPrice("NEVER EXPIRES");
+        	else
+        		item_details.setPrice("NEVER EXPIRES");
+        	item_details.setPrice(p.getExpiration() + " hours");
+        	results.add(item_details);
+    	}
+
+    	return results;
+    }
+	
 @Override
 public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
 	// TODO Auto-generated method stub
@@ -117,7 +188,19 @@ public void buttonClick(View view) {
           break;
     case R.id.button3:
           showChooser();
-    break;
+          break;
+    case R.id.button4:
+    	showChooser();
+    	break;
+    case R.id.button5:
+        EditText name,file;
+        name = (EditText) findViewById(R.id.editText3);
+        file = (EditText) findViewById(R.id.editText4);
+    	permission p = new permission(name.getText().toString(), file.getText().toString(), 0);
+    	name.setText("");
+    	file.setText("");
+    	db.addPermission(p);
+    	break;
   }
 
 }
