@@ -39,6 +39,33 @@ public class SessionManagement {
         editor = pref.edit();
     }
  
+    public void saveShare(String file)
+    {        
+        // Storing name in pref
+        editor.putString("file", file);
+ 
+        // commit changes
+        editor.commit();
+    }
+    
+    public void saveState(boolean t)
+    {
+        editor.putBoolean("state", t);
+ 
+        // commit changes
+        editor.commit();
+    }
+    
+    public String getShare()
+    {
+    	return pref.getString("file", "");
+    }
+    
+    public boolean getState()
+    {
+    	return pref.getBoolean("state", false);
+    }
+    
     /**
      * Create login session
      * */
