@@ -3,7 +3,7 @@ package com.paul.linknet;
 public class permission {
  
     //private variables
- //   int _host;
+    int _user;
     String _name;
   //  int _receiver;
     String _file;
@@ -15,7 +15,8 @@ public class permission {
  
     }
     // constructor
-    public permission(String name, String file, int expiration){
+    public permission(int user, String name, String file, int expiration){
+    	this._user = user;
     	this._name = name;
         this._file = file;
         this._expiration = expiration;
@@ -39,15 +40,15 @@ public class permission {
         this._id = id;
     }
     
-//    // getting ID
-//    public int getHost(){
-//        return this._host;
-//    }
-// 
-//    // setting id
-//    public void setHost(int id){
-//        this._host = id;
-//    }
+    // getting ID
+    public int getUser(){
+        return this._user;
+    }
+ 
+    // setting id
+    public void setUser(int id){
+        this._user = id;
+    }
 ////
 //    // getting ID
 //    public int getReceiver(){

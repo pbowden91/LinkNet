@@ -14,7 +14,7 @@ public class sqllite extends SQLiteOpenHelper {
 	 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
  
     // Database Name
     private static final String DATABASE_NAME = "permissionsManager";
@@ -24,6 +24,7 @@ public class sqllite extends SQLiteOpenHelper {
 
     // Contacts Table Columns names
     private static final String KEY_ID = "pid";
+    private static final String KEY_UID = "uid";
     private static final String KEY_TO = "username";
     private static final String KEY_FILE = "file";
     private static final String KEY_CREATED = "time_created";
@@ -38,7 +39,7 @@ public class sqllite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_PERMISSIONS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TO + " TEXT," + KEY_FILE + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_UID + " INTEGER," + KEY_TO + " TEXT," + KEY_FILE + " TEXT,"
                 + KEY_CREATED + " TEXT," + KEY_EXPIRATION + " INTEGER " + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
         Log.d("DB create:", CREATE_CONTACTS_TABLE);
@@ -64,7 +65,7 @@ public class sqllite extends SQLiteOpenHelper {
  
         ContentValues values = new ContentValues();
 
-        String sql = "INSERT INTO " + TABLE_PERMISSIONS + " (" + KEY_TO + ", " + KEY_FILE + ", " + KEY_EXPIRATION + ") VALUES ('" + p.getName() + "', '" + p.getFile() + "', " + 0 + ")";
+        String sql = "INSERT INTO " + TABLE_PERMISSIONS + " (" + KEY_UID + ", " + KEY_TO + ", " + KEY_FILE + ", " + KEY_EXPIRATION + ") VALUES (" + p.getUser() +  ", '" + p.getName() + "', '" + p.getFile() + "', " + 0 + ")";
         
         // Inserting Row
         Log.d("Add: ", sql);
@@ -75,7 +76,7 @@ public class sqllite extends SQLiteOpenHelper {
     public List<permission> getAllHostPermissions(int id) {
         List<permission> permissionList = new ArrayList<permission>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS;
+        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS + " WHERE " + KEY_UID + " = " + id;
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -98,10 +99,10 @@ public class sqllite extends SQLiteOpenHelper {
         return permissionList;
     }
     // Getting All Contacts
-    public List<permission> getAllPermissions() {
+    public List<permission> getAllPermissions(int id) {
         List<permission> permissionList = new ArrayList<permission>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS;
+        String selectQuery = "SELECT  * FROM " + TABLE_PERMISSIONS + " WHERE " + KEY_UID + " = " + id;
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
