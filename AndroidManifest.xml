@@ -7,9 +7,12 @@
     <uses-sdk
         android:minSdkVersion="13"
         android:targetSdkVersion="17" />
-       <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-       
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,28 +26,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-                <activity android:name="Activity2"></activity>
-       
+        </activity>      
                 <activity android:name="FileChooserActivity"></activity>
                 <activity android:name="register"></activity>
-                <activity android:name="login2"></activity>
-                
-               <activity
-            android:name="com.example.filenet.utils.FileChooserActivity"
-            android:exported="false"
-            android:icon="@drawable/ic_chooser"
-            android:label="@string/choose_file"
-            android:theme="@style/ChooserTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
-
-                <data android:mimeType="*/*" />
-            </intent-filter>
-        </activity>
+                <activity android:name="login2"></activity>              
     </application>
 
 </manifest>

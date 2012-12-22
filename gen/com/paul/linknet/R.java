@@ -14,11 +14,14 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int myColor=0x7f070000;
+        public static final int myColor=0x7f050001;
+        /**  Retrieved via Resources.getColor() and friends. 
+         */
+        public static final int red=0x7f050000;
     }
     public static final class dimen {
-        public static final int list_item_padding=0x7f050001;
-        public static final int list_padding=0x7f050000;
+        public static final int list_item_padding=0x7f060001;
+        public static final int list_padding=0x7f060000;
     }
     public static final class drawable {
         public static final int bb1=0x7f020000;
@@ -35,15 +38,22 @@ public final class R {
         public static final int ic_folder=0x7f02000b;
         public static final int ic_launcher=0x7f02000c;
         public static final int icon=0x7f02000d;
-        public static final int no_image=0x7f02000e;
-        public static final int p1=0x7f02000f;
-        public static final int p2=0x7f020010;
-        public static final int scanner=0x7f020011;
+        public static final int logo=0x7f02000e;
+        public static final int no_image=0x7f02000f;
+        public static final int notification=0x7f020010;
+        public static final int p1=0x7f020011;
+        public static final int p2=0x7f020012;
+        public static final int scanner=0x7f020013;
+        /**  Retrieved via Resources.getDrawable() and friends. 
+         */
+        public static final int semi_black=0x7f020016;
+        public static final int widget_off=0x7f020014;
+        public static final int widget_on=0x7f020015;
     }
     public static final class id {
         public static final int Button01=0x7f0b000f;
         public static final int TextView01=0x7f0b0024;
-        public static final int TextView02=0x7f0b0028;
+        public static final int TextView02=0x7f0b0030;
         public static final int btn_login=0x7f0b0022;
         public static final int btn_register=0x7f0b0027;
         public static final int button1=0x7f0b0002;
@@ -63,19 +73,26 @@ public final class R {
         public static final int explorer_fragment=0x7f0b0011;
         public static final int file_icon=0x7f0b0012;
         public static final int file_name=0x7f0b0013;
+        public static final int ip_address=0x7f0b002a;
         public static final int itemDescription=0x7f0b0016;
+        public static final int last_error=0x7f0b002d;
+        public static final int last_error_label=0x7f0b002c;
         public static final int list=0x7f0b000d;
         public static final int listDescription=0x7f0b001c;
         public static final int listTitle=0x7f0b001a;
         public static final int login=0x7f0b0026;
-        public static final int logout=0x7f0b002a;
+        public static final int logout=0x7f0b0034;
         public static final int lv_country=0x7f0b000e;
-        public static final int menu_settings=0x7f0b0029;
+        public static final int menu_settings=0x7f0b0033;
         public static final int name=0x7f0b0015;
         public static final int photo=0x7f0b0014;
         public static final int price=0x7f0b0017;
         public static final int register=0x7f0b0023;
+        public static final int server_status=0x7f0b0029;
+        public static final int session_monitor=0x7f0b002f;
+        public static final int session_monitor_checkbox=0x7f0b002e;
         public static final int spinner1=0x7f0b0010;
+        public static final int start_stop_button=0x7f0b0028;
         public static final int tab1=0x7f0b0001;
         public static final int tab2=0x7f0b0005;
         public static final int tab3=0x7f0b0008;
@@ -84,6 +101,9 @@ public final class R {
         public static final int tv_error=0x7f0b0021;
         public static final int tv_pw=0x7f0b001f;
         public static final int tv_un=0x7f0b001d;
+        public static final int widget_button_off=0x7f0b0032;
+        public static final int widget_button_on=0x7f0b0031;
+        public static final int wifi_status=0x7f0b002b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -94,28 +114,116 @@ public final class R {
         public static final int listing=0x7f030005;
         public static final int main=0x7f030006;
         public static final int register=0x7f030007;
-        public static final int two_col_row=0x7f030008;
+        public static final int server_control_activity=0x7f030008;
+        public static final int two_col_row=0x7f030009;
+        public static final int widget=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_main=0x7f0a0000;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int button0=0x7f060006;
-        public static final int button1=0x7f060007;
-        public static final int button3=0x7f06000f;
-        public static final int choose_file=0x7f06000b;
-        public static final int chooser_title=0x7f06000d;
-        public static final int empty_directory=0x7f060009;
-        public static final int error_selecting_file=0x7f06000c;
-        public static final int filefolder=0x7f060008;
-        public static final int hello_world=0x7f060004;
-        public static final int menu_settings=0x7f060005;
-        public static final int storage_removed=0x7f06000a;
-        public static final int text2=0x7f06000e;
-        public static final int title_section1=0x7f060003;
-        public static final int title_section2=0x7f060002;
-        public static final int title_section3=0x7f060001;
+        public static final int about_label=0x7f07002b;
+        public static final int accept_connections_from_net=0x7f070058;
+        public static final int accept_connections_from_wifi=0x7f070059;
+        public static final int acceptproxy_default=0x7f070026;
+        public static final int acceptproxy_label=0x7f070025;
+        public static final int acceptwifi_default=0x7f070024;
+        public static final int acceptwifi_label=0x7f070023;
+        public static final int add_user=0x7f070030;
+        public static final int advancedsettings_label=0x7f07001e;
+        public static final int app_name=0x7f070000;
+        public static final int at_least_one_listener=0x7f07005a;
+        public static final int button0=0x7f070006;
+        public static final int button1=0x7f070007;
+        public static final int button3=0x7f07000f;
+        public static final int cancel=0x7f070057;
+        public static final int cannot_start_until_wifi=0x7f070039;
+        public static final int cant_get_url=0x7f07003f;
+        public static final int choose_file=0x7f07000b;
+        public static final int chooser_title=0x7f07000d;
+        public static final int chrootDir_validation_error=0x7f07005b;
+        public static final int chroot_default=0x7f070022;
+        public static final int chroot_label=0x7f070021;
+        public static final int config_header=0x7f070063;
+        public static final int config_intro=0x7f070064;
+        public static final int config_password=0x7f07004b;
+        public static final int config_portnum=0x7f07004c;
+        public static final int config_username=0x7f07004a;
+        public static final int disable_wifi=0x7f07003b;
+        public static final int disabled=0x7f070052;
+        public static final int donation=0x7f070061;
+        public static final int empty_directory=0x7f070009;
+        public static final int enable_wifi=0x7f07003a;
+        public static final int enabled=0x7f070051;
+        public static final int error_dialog_label=0x7f070054;
+        public static final int error_selecting_file=0x7f07000c;
+        public static final int extra_label=0x7f070029;
+        public static final int filefolder=0x7f070008;
+        public static final int hello_world=0x7f070004;
+        public static final int help_dlg_message=0x7f07002d;
+        public static final int help_dlg_title=0x7f07002c;
+        public static final int help_label=0x7f07002a;
+        public static final int instructions_label=0x7f070047;
+        public static final int instructions_text=0x7f070062;
+        public static final int last_error=0x7f07003e;
+        public static final int manage_users=0x7f070031;
+        public static final int market_version_label=0x7f070015;
+        public static final int market_version_summary=0x7f070016;
+        public static final int menu_byline=0x7f07002f;
+        public static final int menu_settings=0x7f070005;
+        public static final int menu_url=0x7f070033;
+        public static final int must_config=0x7f07005d;
+        public static final int my_url_is=0x7f070038;
+        public static final int name_version=0x7f07002e;
+        public static final int no_url_yet=0x7f070036;
+        public static final int ok=0x7f070046;
+        public static final int password_default=0x7f07001b;
+        public static final int password_label=0x7f07001a;
+        public static final int password_validation_error=0x7f07004e;
+        public static final int port_validation_error=0x7f07004f;
+        public static final int portnumber_default=0x7f070020;
+        public static final int portnumber_label=0x7f07001f;
+        public static final int proxy_status=0x7f07005e;
+        public static final int proxy_transferred=0x7f07005f;
+        public static final int proxy_url=0x7f070060;
+        public static final int running=0x7f070040;
+        public static final int running_label=0x7f070011;
+        public static final int running_summary_failed=0x7f070014;
+        public static final int running_summary_started=0x7f070013;
+        public static final int running_summary_stopped=0x7f070012;
+        public static final int save_settings=0x7f070049;
+        public static final int server_log=0x7f070044;
+        public static final int server_options=0x7f070032;
+        public static final int server_status=0x7f070037;
+        public static final int session_monitor=0x7f070043;
+        public static final int settings_label=0x7f070017;
+        public static final int setup_label=0x7f070048;
+        public static final int show_password_default=0x7f07001d;
+        public static final int show_password_label=0x7f07001c;
+        public static final int start_server=0x7f070034;
+        public static final int stay_within_folder=0x7f070056;
+        public static final int stop_server=0x7f070035;
+        public static final int stopped=0x7f070041;
+        public static final int storage_removed=0x7f07000a;
+        public static final int submit_bug_reports=0x7f070045;
+        public static final int swiftp_name=0x7f070010;
+        public static final int text2=0x7f07000e;
+        public static final int the_error_was=0x7f070055;
+        public static final int title_section1=0x7f070003;
+        public static final int title_section2=0x7f070002;
+        public static final int title_section3=0x7f070001;
+        public static final int unknown=0x7f070042;
+        public static final int user_password_intro=0x7f070065;
+        public static final int username_default=0x7f070019;
+        public static final int username_label=0x7f070018;
+        public static final int username_validation_error=0x7f07004d;
+        public static final int violates_chroot=0x7f07005c;
+        public static final int waiting=0x7f070053;
+        public static final int wakelock_default=0x7f070028;
+        public static final int wakelock_label=0x7f070027;
+        public static final int wifi_state_receiver_label=0x7f070050;
+        public static final int wifi_status=0x7f07003d;
+        public static final int wifi_waiting=0x7f07003c;
     }
     public static final class style {
         /** 
@@ -151,5 +259,7 @@ public final class R {
     }
     public static final class xml {
         public static final int mimetypes=0x7f040000;
+        public static final int preferences=0x7f040001;
+        public static final int widget_provider=0x7f040002;
     }
 }

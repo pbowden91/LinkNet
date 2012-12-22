@@ -13,6 +13,8 @@ import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+//import org.swiftp.FTPServerService;
+//import org.swiftp.UiUpdater;
 
 import com.example.filenet.utils.FileUtils;
 import com.paul.linknet.ItemDetails;
@@ -24,14 +26,20 @@ import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -263,11 +271,20 @@ public void buttonClick(View view) {
 
 public void sharingOn()
 {
-	new setStateOn().execute();
+	//Context context = getApplicationContext();
+	//Intent intent = new Intent(context,	FTPServerService.class);
+
+	//new setStateOn().execute();
+	//context.startService(intent);
 }
 public void sharingOff()
-{
-	new setStateOff().execute();
+{    		
+//	Context context = getApplicationContext();
+	//Intent intent = new Intent(context,	FTPServerService.class);
+
+	//new setStateOff().execute();
+	//context.stopService(intent);
+
 }
 
 
@@ -343,10 +360,12 @@ private void showChooser(int request) {
     	protected String doInBackground(String... urls) {
             try {
             	String ip = getLocalIpAddress();
+            	String privateIP = getPrivateIpAddress();
 				ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 				postParameters.add(new BasicNameValuePair("id", Integer.toString(uid)));
 				postParameters.add(new BasicNameValuePair("state", "1"));
 				postParameters.add(new BasicNameValuePair("ip", ip));
+				postParameters.add(new BasicNameValuePair("private", privateIP));
 
 				String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linkshare.php", postParameters);
 				    return response.trim();
@@ -355,6 +374,8 @@ private void showChooser(int request) {
                 return e.toString();
             }
         }
+
+    	
         protected void onPostExecute(String result) {
           //  try { 
             //    int id = Integer.parseInt(result);
@@ -368,6 +389,27 @@ private void showChooser(int request) {
         //    }       
         }     
     }
+    
+    public String getPrivateIpAddress()
+    {
+    	String ipv4;
+            try {
+                for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                    NetworkInterface intf = en.nextElement();
+                    for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                        InetAddress inetAddress = enumIpAddr.nextElement();
+                        if (!inetAddress.isLoopbackAddress() && InetAddressUtils.isIPv4Address(ipv4 = inetAddress.getHostAddress())){
+                            return inetAddress.getHostAddress().toString();
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                Log.e("IP Address", ex.toString());
+            }
+            return null;
+    }
+
+    
     public String getLocalIpAddress()
     {
 //    	String ipv4;
@@ -388,7 +430,7 @@ private void showChooser(int request) {
     	
     		try {
 				Document doc = Jsoup.connect("http://automation.whatismyip.com/n09230945.asp").get();
-				return doc.select("body").html().toString() + ":53855";
+				return doc.select("body").html().toString() + ":2121";
     		} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -405,6 +447,7 @@ private void showChooser(int request) {
 				postParameters.add(new BasicNameValuePair("id", Integer.toString(uid)));
 				postParameters.add(new BasicNameValuePair("state", "0"));
 				postParameters.add(new BasicNameValuePair("ip", ""));
+				postParameters.add(new BasicNameValuePair("private", ""));
 
 				String response = CustomHttpClient.executeHttpPost("http://cloud.cs50.net/~pbowden/linkshare.php", postParameters);
 				    return response.trim();
@@ -426,5 +469,110 @@ private void showChooser(int request) {
         //    }       
         }    
     }
-	
+    
+//    public void updateUi() {
+//    	WifiManager wifiMgr = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+//    	int wifiState = wifiMgr.getWifiState();
+//    	
+//    	// Set the start/stop button text and server status text
+//    	if(FTPServerService.isRunning()) {
+////    		InetAddress address =  FTPServerService.getWifiIp();
+////        	if(address != null) {
+////        		ipText.setText("ftp://" + address.getHostAddress() + 
+////    		               ":" + FTPServerService.getPort() + "/");
+////        	} else {
+////        		myLog.l(Log.VERBOSE, "Null address from getServerAddress()", true);
+////        		ipText.setText(R.string.cant_get_url);
+////        	}
+////        	startStopButton.setVisibility(View.VISIBLE);
+////        	startStopButton.setText(R.string.stop_server);
+////        	serverStatusText.setText(R.string.running);
+////    	} else {
+////    		// Update the start/stop button to show the correct text
+////    		ipText.setText(R.string.no_url_yet);
+////    		serverStatusText.setText(R.string.stopped);
+////    		startStopButton.setText(R.string.start_server);
+//    	}
+//
+//    	// Manage the text of the wifi enable/disable button and the 
+//    	// wifi status text.
+//    	switch(wifiState) {
+//    	case WifiManager.WIFI_STATE_ENABLED:
+//    		//wifiButton.setText(R.string.disable_wifi);
+//    		//wifiStatusText.setText(R.string.enabled);
+//    		break;
+//    	case WifiManager.WIFI_STATE_DISABLED:
+//    		//wifiButton.setText(R.string.enable_wifi);
+//    	//	wifiStatusText.setText(R.string.disabled);
+//    		break;
+//    	default:
+//    		// We're in some transient state that will eventually
+//    		// become one of the other two states.
+//   // 		wifiStatusText.setText(R.string.waiting);
+//    		break;
+//    	}
+//
+//		// If the session monitor is enabled, then retrieve the contents
+//		
+//    }
+//    
+//    
+//    public Handler handler = new Handler() {
+//    	public void handleMessage(Message msg) {
+//    		switch(msg.what) {
+//    		case 0:  // We are being told to do a UI update
+//    			// If more than one UI update is queued up, we only need to do one.
+//    			removeMessages(0);
+//    			break;
+//    		case 1:  // We are being told to display an error message
+//    			removeMessages(1);
+//    		}
+//    	
+//    	}
+//    };
+//
+//    
+//    protected void onStart() {
+//	super.onStart();
+//	UiUpdater.registerClient(handler);
+//	updateUi();
+//}
+//
+//protected void onResume() {
+//	super.onResume();
+//    UiUpdater.registerClient(handler);
+//	updateUi();
+//	//myLog.l(Log.DEBUG, "Registered for wifi updates");
+//	this.registerReceiver(wifiReceiver, 
+//			new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
+//}
+//
+///* Whenever we lose focus, we must unregister from UI update messages from
+// * the FTPServerService, because we may be deallocated.
+// */
+//protected void onPause() {
+//	super.onPause();
+//	UiUpdater.unregisterClient(handler);
+//	this.unregisterReceiver(wifiReceiver);
+//}
+//
+//protected void onStop() {
+//	super.onStop();
+//	UiUpdater.unregisterClient(handler);
+//}
+//
+//protected void onDestroy() {
+//	super.onDestroy();
+//	UiUpdater.unregisterClient(handler);
+//}
+// 
+//BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
+//	public void onReceive(Context ctx, Intent intent) {
+//	}
+//};
+//
+//boolean requiredSettingsDefined() {
+//		return true;
+//}
+
 }
